@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Expandable Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #content .item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .item img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+    .item a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #007BFF;
+      text-decoration: none;
+    }
+    .item a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Expandable Website</h1>
+
+  <form id="addForm">
+    <input type="text" id="title" placeholder="Title" required />
+    <textarea id="contentText" placeholder="Content" required></textarea>
+    <input type="url" id="imageUrl" placeholder="Image URL (optional)" />
+    <input type="url" id="linkUrl" placeholder="Search/Link URL (optional)" />
+    <button type="submit">Add</button>
+  </form>
+
+  <div id="content"></div>
+
+  <script>
+    const form = document.getElementById('addForm');
+    const content = document.getElementById('content');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const text = document.getElementById('contentText').value;
+      const imageUrl = document.getElementById('imageUrl').value;
+      const linkUrl = document.getElementById('linkUrl').value;
+
+      const item = document.createElement('div');
+      item.className = 'item';
+
+      let innerHTML = `<h3>${title}</h3><p>${text}</p>`;
+      if (imageUrl) innerHTML += `<img src="${imageUrl}" alt="Image" />`;
+      if (linkUrl) innerHTML += `<a href="${linkUrl}" target="_blank">Visit Link</a>`;
+
+      item.innerHTML = innerHTML;
+      content.prepend(item);
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
